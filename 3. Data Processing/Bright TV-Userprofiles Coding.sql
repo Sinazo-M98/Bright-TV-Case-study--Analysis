@@ -103,8 +103,53 @@ WHEN Province='None' THEN 'Uncatagosized'
 WHEN Province=' ' THEN 'Uncatagorized'
 ELSE Province
 END AS Region
-FROM workspace.database.user_profiles
+FROM workspace.database.user_profiles;
+----------------------------------------------------------------------------------------
+SELECT UserId,
+CASE
+WHEN Email IS NOT NULL THEN 1
+ELSE 0
+END AS Email_flag,
+
+CASE
+WHEN `Social Media handle` IS NOT NULL THEN 1
+ELSE 0
+END AS Social_media_flag,
+
+CASE
+WHEN Gender='None' THEN 'Unknown'
+WHEN Gender=' ' THEN 'Unknown'
+WHEN Gender IS NULL THEN 'Unknown'
+ELSE Gender
+END AS Sex,
+
+CASE
+WHEN Race='other' THEN 'None'
+WHEN Race=' ' THEN 'None'
+WHEN Race IS NULL THEN 'None'
+ELSE Race
+END AS Ethnicity,
+
+CASE
+WHEN Age=0 THEN '01.Infants'
+WHEN Age BETWEEN 1 AND 12 THEN '02.Kids'
+WHEN Age BETWEEN 13 AND 19 THEN '03.Teenagers'
+WHEN Age BETWEEN 20 AND 35 THEN '04.Young Adults'
+WHEN Age BETWEEN 36 AND 50 THEN '05.Adult'
+WHEN Age BETWEEN 51 AND 65 THEN '06.Elder'
+WHEN Age>65 THEN '07.Pensioner'
+END AS Age_category,
+
+CASE
+WHEN Province='None' THEN 'Uncatagosized'
+WHEN Province=' ' THEN 'Uncatagorized'
+ELSE Province
+END AS Region
+FROM workspace.database.user_profiles;
 
 
+
+
+-- COMMAND ----------
 
 
