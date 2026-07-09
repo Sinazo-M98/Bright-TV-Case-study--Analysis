@@ -96,7 +96,7 @@ FROM workspace.database.user_profiles;
 ---------------------------------------------------------
 SELECT DISTINCT Province
 FROM workspace.database.user_profiles;
------------------------------------------------
+
 SELECT DISTINCT
 CASE
 WHEN Province='None' THEN 'Uncatagosized'
