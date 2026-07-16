@@ -4,7 +4,7 @@ Checking all the columns in the table viewership
 ---------------------------------------------------
 SELECT *
 FROM workspace.database.viewership
-LIMIT 10;
+LIMIT 3;
 -------------------------------------------------
 Checking for NULL values in my dataset -table Viewership
 -----------------------------------------------
@@ -21,34 +21,21 @@ WHERE UserID0 <> userid4
 ---------------------------------------------
 Check for duplicates
 -----------------------------------------------------
-SELECT COUNT (*),UserID0,RecordDate2
+SELECT COUNT (*),UserID0,RecordDate2,
 FROM workspace.database.viewership
 GROUP BY UserID0,RecordDate2
 COUNT(*) AS duplicate_count
 HAVING COUNT(*)>1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-SELECT RecordDate2,
+-----------------------------------------------
+SELECT COUNT(*) AS duplicate_cnt,
+UserID0,
 TO_DATE(RecordDate2) AS watch_date,
-DAYNAME(TO_DATE(RecordDate2)) AS Day_name,
-YEAR(TO_DATE(RecordDate2)) AS event_year
+Date_format(RecordDate2, 'HH:mm:ss') AS watch_time,
+Date_format(`Duration 2`, 'HH:mm:ss') AS duration,
+Channel2
 FROM workspace.database.viewership
+GROUP BY ALL
+HAVING COUNT(*)>1
+ORDER BY duplicate_cnt;
 
+------WHERE UserID0=810044;
